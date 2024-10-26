@@ -1,0 +1,18 @@
+---
+services:
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ~/docker/firefox:/config
+    ports:
+      - ${FIREFOX_PORT_1}:3000
+      - ${FIREFOX_PORT_2}:3001
+    shm_size: "1gb"
+    restart: unless-stopped
