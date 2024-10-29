@@ -18,3 +18,19 @@ sudo docker run -d \
   -v /:/host \
   portainer/agent:2.21.1
   ```
+
+# Mount a exteral drive permanently
+
+```bash
+lsblk
+# Get Device UUID
+sudo blkid
+sudo nano /etc/fstab
+# Enter the below line in fstab
+UUID=abcd-1234   /mnt/passport   ext4   defaults   0   2
+
+sudo mount -a
+systemctl daemon-reload
+# Final Check
+df -h
+```
