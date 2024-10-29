@@ -11,5 +11,5 @@ services:
         ports:
             - ${PORT_1}:5001
         volumes:
-            - ~/docker/jiotv_go:/app/
+            - ~/docker/jiotv_go/secrets:/app/secrets
         image: ghcr.io/jiotv-go/jiotv_go
