@@ -1,0 +1,2 @@
+curl -fsSL https://get.casaos.io | sudo bash
+curl -fsSL https://tailscale.com/install.sh | sh
