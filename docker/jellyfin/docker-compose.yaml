@@ -1,0 +1,17 @@
+---
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID}
+      - PGID=${PUID}
+      - TZ=${TZ}
+    volumes:
+      - ~/docker/jellyfin/library:/config
+      - /mnt/passport/TV:/data/tvshows
+      - /mnt/passport/Movie:/data/movies
+    ports:
+      - ${PORT_1}:8096
+      - ${PORT_2}:7359/udp #optional
+    restart: unless-stopped
