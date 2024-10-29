@@ -1,0 +1,15 @@
+name: jiotv
+services:
+    jiotv_go:
+        environment:
+          - PUID=${PUID}
+          - PGID=${PGID}
+          - TZ=${TZ}
+          - JIOTV_EPG=${EPG}
+          - JIOTV_DEBUG=${DEBUG}
+          - JIOTV_DISABLE_TS_HANDLER=${DISABLE_TS_HANDLER}
+        ports:
+            - ${PORT_1}:5001
+        volumes:
+            - ~/docker/jiotv_go:/app/
+        image: ghcr.io/jiotv-go/jiotv_go
