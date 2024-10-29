@@ -19,7 +19,7 @@ sudo docker run -d \
   portainer/agent:2.21.1
   ```
 
-# Mount a exteral drive permanently
+# Mount a external drive permanently
 
 ```bash
 lsblk
