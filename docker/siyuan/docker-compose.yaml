@@ -1,0 +1,13 @@
+services:
+    main:
+        volumes:
+            - /mnt/passport/Notes/siyuan-note/workspace:/siyuan/workspace
+        ports:
+            - ${PORT_1}:6806
+        restart: unless-stopped
+        environment:
+            - PUID=${PUID}
+            - PGID=${PGID}
+            - TZ={TZ}
+        image: b3log/siyuan
+        command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${ACCESS_CODE}']
