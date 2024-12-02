@@ -1,4 +1,3 @@
-name: jiotv
 services:
     jiotv_go:
         environment:
