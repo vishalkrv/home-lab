@@ -4,9 +4,10 @@ services:
           - PUID=${PUID}
           - PGID=${PGID}
           - TZ=${TZ}
-          - JIOTV_EPG=${EPG}
-          - JIOTV_DEBUG=${DEBUG}
-          - JIOTV_DISABLE_TS_HANDLER=${DISABLE_TS_HANDLER}
+          - JIOTV_EPG=${JIOTV_EPG}
+          - JIOTV_DEBUG=${JIOTV_DEBUG}
+          - JIOTV_DISABLE_TS_HANDLER=${JIOTV_DISABLE_TS_HANDLER}
+          - JIOTV_DRM=${JIOTV_DRM}
         ports:
             - ${PORT_1}:5001
         volumes:
