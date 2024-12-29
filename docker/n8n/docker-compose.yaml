@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: always
+    ports:
+      - "${PORT_1}:5678"
+    environment:
+      # Basic configuration
+      - N8N_BASIC_AUTH_ACTIVE=true          # Enables basic auth
+      - N8N_BASIC_AUTH_USER=${USER}           # Username for basic auth
+      - N8N_BASIC_AUTH_PASSWORD=${PASS}    # Password for basic auth
+      
+      # URL configuration
+      - N8N_HOST=localhost                  # Hostname of the instance
+      - N8N_PORT=${PORT_1}                       # Port n8n runs on
+      - N8N_PROTOCOL=http                   # Protocol to use (http or https)
+      
+      # Database configuration
+      - DB_TYPE=sqlite                      # Use SQLite by default
+      - DB_SQLITE_VACUUM_ON_STARTUP=true    # Optimizes SQLite database on startup
+      
+      # Customize if needed
+      - GENERIC_TIMEZONE=${TZ}   # Optional: Set server timezone
+
+    volumes:
+      - ~/docker/n8n-data:/home/node/.n8n          # Persist n8n data across container restarts
