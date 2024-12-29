@@ -1,5 +1,13 @@
 version: '3.8'
 
+volumes:
+    n8n_data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /docker/n8n/data  
+
 services:
   n8n:
     image: n8nio/n8n:latest
@@ -7,6 +15,8 @@ services:
     restart: always
     ports:
       - "${PORT_1}:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
     environment:
       # Basic configuration
       - N8N_BASIC_AUTH_ACTIVE=true          # Enables basic auth
@@ -25,5 +35,4 @@ services:
       # Customize if needed
       - GENERIC_TIMEZONE=${TZ}   # Optional: Set server timezone
 
-    volumes:
-      - ~/docker/n8n-data:/home/node/.n8n          # Persist n8n data across container restarts
+      # Persist n8n data across container restarts
