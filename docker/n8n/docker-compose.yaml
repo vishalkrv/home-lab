@@ -6,7 +6,7 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /docker/n8n/data  
+        device: /docker/n8n  
 
 services:
   n8n:
