@@ -27,4 +27,6 @@ services:
 
       - N8N_SECURE_COOKIE=${SECURE_COOKE}
 
+      - WEBHOOK_URL={DOMAIN_ADDRESS}
+
       # Persist n8n data across container restarts
