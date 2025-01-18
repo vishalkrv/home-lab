@@ -9,7 +9,7 @@ services:
       - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
     volumes:
       - /docker/kavita/config:/config
-      - /docker/data:/data #optional
+      - /mnt/passport/Books:/data #optional
     ports:
       - ${PORT_1}:5000
     restart: unless-stopped
