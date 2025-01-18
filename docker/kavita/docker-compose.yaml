@@ -1,0 +1,15 @@
+services:
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+    volumes:
+      - /docker/kavita/config:/config
+      - /docker/data:/data #optional
+    ports:
+      - ${PORT_1}:5000
+    restart: unless-stopped
