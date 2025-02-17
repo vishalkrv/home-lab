@@ -11,6 +11,6 @@ services:
     environment:
       MINIO_ROOT_USER: "${USER}"   # Change this to your desired admin username
       MINIO_ROOT_PASSWORD: "${PASS}" # Change this to a strong password
-    command: server /data --console-address ":${PORT_2}"
+    command: server /data --console-address ":9090"
     volumes:
       - /docker/minio-data:/data
