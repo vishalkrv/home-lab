@@ -5,9 +5,10 @@ services:
         ports:
             - ${PORT_1}:6806
         restart: unless-stopped
+        user: "${PUID}:1000"
         environment:
             - PUID=${PUID}
             - PGID=${PGID}
             - TZ={TZ}
-        image: b3log/siyuan
+        image: apkdv/siyuan-unlock
         command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${ACCESS_CODE}']
