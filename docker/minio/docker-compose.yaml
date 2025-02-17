@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    restart: always
+    ports:
+      - "${PORT_1}:9000"
+      - "${PORT_2}:9090"
+    environment:
+      MINIO_ROOT_USER: "${USER}"   # Change this to your desired admin username
+      MINIO_ROOT_PASSWORD: "${PASS}" # Change this to a strong password
+    command: server /data --console-address ":${PORT_2}"
+    volumes:
+      - /docker/minio-data:/data
