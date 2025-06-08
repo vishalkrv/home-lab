@@ -10,5 +10,5 @@ services:
       CRAWLAB_GRPC_ADDRESS: "${MASTER_NODE}:${PORT_2}"  # grpc address
       CRAWLAB_FS_FILER_URL: "http://${MASTER_NODE}:${PORT_1}/api/filer"  # seaweedfs api
     volumes:
-      - "/opt/.crawlab/worker:/root/.crawlab"  # persistent crawlab metadata
-      - "/opt/crawlab/worker:/data"  # persistent crawlab data
+      - "/docker/.crawlab/worker:/root/.crawlab"  # persistent crawlab metadata
+      - "/docker/crawlab/worker:/data"  # persistent crawlab data
