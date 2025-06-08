@@ -28,7 +28,7 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"  # mongo username
-      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_USERNAME}"  # mongo password
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"  # mongo password
     volumes:
       - "/docker/crawlab/mongo/data/db:/data/db"  # persistent mongo data
     ports:
