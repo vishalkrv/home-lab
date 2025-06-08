@@ -18,8 +18,8 @@ services:
       - "/docker/crawlab/master:/data"  # persistent crawlab data
       - "/var/crawlab/log:/var/log/crawlab" # log persistent 
     ports:
-      - ${PORT_1}:8080  # exposed api port
-      - ${PORT_2}:9666  # exposed grpc port
+      - "${PORT_1}:8080"  # exposed api port
+      - "${PORT_2}:9666"  # exposed grpc port
     depends_on:
       - mongo
 
