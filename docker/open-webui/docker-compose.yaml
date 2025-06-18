@@ -2,14 +2,14 @@ services:
     open-webui:
         network_mode: host
         ports:
-            - ${PORT_1}:8080
+            - "${PORT_1}:8080"
         volumes:
             - ~/docker/open-webui:/app/backend/data
         environment:
             - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
         container_name: open-webui
         restart: always
-        image: ghcr.io/open-webui/open-webui:main
+        image: ghcr.io/open-webui/open-webui:${VERSION}
 volumes:
     open-webui:
         external: true
