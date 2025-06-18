@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    url: http://localhost:9090 # Prometheus is running on the same host
+    isDefault: true
+    access: proxy
+    version: 1
+    editable: true

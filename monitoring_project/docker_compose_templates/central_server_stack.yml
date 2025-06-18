@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      # Mount Prometheus config from the host path we SCP'd earlier
+      - /opt/monitoring/central_server_configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus # Persistent volume for metrics data
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana # Persistent volume for Grafana data
+      # Mount Grafana provisioning files from the host path we SCP'd earlier
+      - /opt/monitoring/central_server_configs/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - /opt/monitoring/central_server_configs/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin # <<< IMPORTANT: CHANGE THIS IN PRODUCTION!
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+      - '--collector.textfile.directory=/var/lib/node_exporter/textfile_collector'
+    network_mode: host # Crucial to monitor host system metrics accurately
+    pid: host          # Required for some process-related metrics
+    volumes:
+      - /:/host:ro,rslave
+      - /var/lib/node_exporter/textfile_collector:/var/lib/node_exporter/textfile_collector
+    restart: unless-stopped
+
+  external_ip_metrics_generator:
+    image: ghcr.io/vishalkrv/custom-metrics-exporter:latest # IMPORTANT: Replace with your Docker Hub user!
+    container_name: external_ip_metrics_generator
+    network_mode: host # Crucial to inspect host connections
+    volumes:
+      - /var/lib/node_exporter/textfile_collector:/var/lib/node_exporter/textfile_collector
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:

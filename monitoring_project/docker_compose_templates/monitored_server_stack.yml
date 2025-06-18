@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+      - '--collector.textfile.directory=/var/lib/node_exporter/textfile_collector'
+    network_mode: host # Crucial to monitor host system metrics accurately
+    pid: host          # Required for some process-related metrics
+    volumes:
+      - /:/host:ro,rslave
+      - /var/lib/node_exporter/textfile_collector:/var/lib/node_exporter/textfile_collector
+    restart: unless-stopped
+
+  external_ip_metrics_generator:
+    image: ghcr.io/vishalkrv/custom-metrics-exporter:latest # IMPORTANT: Replace with your Docker Hub user!
+    container_name: external_ip_metrics_generator
+    network_mode: host # Crucial to inspect host connections
+    volumes:
+      - /var/lib/node_exporter/textfile_collector:/var/lib/node_exporter/textfile_collector
+    restart: unless-stopped
