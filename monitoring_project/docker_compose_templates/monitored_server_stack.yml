@@ -17,7 +17,7 @@ services:
   external_ip_metrics_generator:
     image: ghcr.io/vishalkrv/custom-metrics-exporter:latest # IMPORTANT: Replace with your Docker Hub user!
     container_name: external_ip_metrics_generator
-    network_mode: host # Crucial to inspect host connections
+    network_mode: host # Crucial to inspect host connection
     volumes:
       - /var/lib/node_exporter/textfile_collector:/var/lib/node_exporter/textfile_collector
     restart: unless-stopped
