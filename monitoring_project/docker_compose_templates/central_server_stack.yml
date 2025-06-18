@@ -4,8 +4,9 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    ports:
-      - "9090:9090"
+    network_mode: host
+    # ports:
+    #   - "9090:9090"
     volumes:
       # Mount Prometheus config from the host path we SCP'd earlier
       - /opt/monitoring/central_server_configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
@@ -15,13 +16,16 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
+      # ADD THIS LINE to explicitly bind Prometheus to IPv4 localhost within its container
+      - '--web.listen-address=0.0.0.0:9090'
     restart: unless-stopped
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    ports:
-      - "3000:3000"
+    network_mode: host
+    # ports:
+    #   - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana # Persistent volume for Grafana data
       # Mount Grafana provisioning files from the host path we SCP'd earlier
@@ -30,6 +34,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin # <<< IMPORTANT: CHANGE THIS IN PRODUCTION!
+      - GF_DATASOURCES_PROMETHEUS_URL=http://prometheus:9090
     restart: unless-stopped
     depends_on:
       - prometheus
@@ -40,6 +45,8 @@ services:
     command:
       - '--path.rootfs=/host'
       - '--collector.textfile.directory=/var/lib/node_exporter/textfile_collector'
+      # ADD THIS LINE to explicitly bind Node Exporter to IPv4 localhost within its container
+      - '--web.listen-address=0.0.0.0:9100'
     network_mode: host # Crucial to monitor host system metrics accurately
     pid: host          # Required for some process-related metrics
     volumes:
