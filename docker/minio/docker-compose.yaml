@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   minio:
-    image: quay.io/minio/minio:latest
+    image: minio_admin:latest
     container_name: minio
     restart: always
     ports:
