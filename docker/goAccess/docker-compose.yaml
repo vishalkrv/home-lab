@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  goaccess:
+    image: justsky/goaccess-for-nginxproxymanager:latest
+    container_name: goaccess
+    restart: always
+    volumes:
+        - /data/compose/1/data/logs:/opt/log
+    ports:
+        - '${PORT_1}:7880'
+    environment:
+        - PUID=${PUID}
+        - PGID=${PUID}
+        - TZ=${TZ}        
+        - SKIP_ARCHIVED_LOGS=False #optional
+        - BASIC_AUTH=False #optional
+        - BASIC_AUTH_USERNAME=user #optional
+        - BASIC_AUTH_PASSWORD=pass #optional               
