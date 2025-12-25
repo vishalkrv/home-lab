@@ -2,8 +2,10 @@ version: '3'
 services:
   jdownloader-2:
     image: jlesage/jdownloader-2
+    env_file:
+      - stack.env #optional
     ports:
       - ${PORT_1}:5800
     volumes:
-      - ~/docker/jdownloader2/config:/config:rw
-      - /mnt/passport/Download:/output:rw
+      - /mnt/user/appdata/jdownloader2/config:/config:rw
+      - /mnt/user/Download:/output:rw
