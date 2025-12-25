@@ -4,13 +4,15 @@ services:
     image: lscr.io/linuxserver/firefox:latest
     container_name: firefox
     security_opt:
-      - seccomp:unconfined #optional
+      - seccomp:unconfined
+    env_file:
+      - stack.env #optional
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - ~/docker/firefox:/config
+      - /mnt/cache/appdata/firefox:/config
     ports:
       - ${PORT_1}:3000
       - ${PORT_2}:3001
