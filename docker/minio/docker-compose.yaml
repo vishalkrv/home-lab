@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   minio:
-    image: minio_admin:latest
+    image: minio_admin:latest@sha256:0ad23f15dff42ed1cc82ecdb4afa3f40b56b897108361a74fef44ec817982822
     container_name: minio
     restart: always
     ports:
@@ -13,4 +13,4 @@ services:
       MINIO_ROOT_PASSWORD: "${PASS}" # Change this to a strong password
     command: server /data --console-address ":9090"
     volumes:
-      - /docker/minio-data:/data
+      - /mnt/user/dbdata/minio-data:/data
