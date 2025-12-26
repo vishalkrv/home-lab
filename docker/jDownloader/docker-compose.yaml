@@ -7,5 +7,5 @@ services:
     ports:
       - ${PORT_1}:5800
     volumes:
-      - /mnt/user/appdata/jdownloader2/config:/config:rw
+      - /mnt/user/appdata/jdownloader/config:/config:rw
       - /mnt/user/Download:/output:rw
