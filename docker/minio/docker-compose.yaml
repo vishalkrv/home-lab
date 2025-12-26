@@ -2,13 +2,16 @@ version: '3.8'
 
 services:
   minio:
-    image: minio_admin:latest
+    image: minio/minio:RELEASE.2025-02-07T23-21-09Z
     container_name: minio
     restart: always
     ports:
       - "${PORT_1}:9000"
       - "${PORT_2}:9090"
     environment:
+        environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
       MINIO_ROOT_USER: "${USER}"   # Change this to your desired admin username
       MINIO_ROOT_PASSWORD: "${PASS}" # Change this to a strong password
     command: server /data --console-address ":9090"
