@@ -4,6 +4,10 @@ services:
     image: jlesage/jdownloader-2
     env_file:
       - stack.env #optional
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     ports:
       - ${PORT_1}:5800
     volumes:
