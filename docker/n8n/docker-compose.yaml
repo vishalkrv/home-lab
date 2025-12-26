@@ -10,6 +10,8 @@ services:
     volumes:
       - /mnt/user/appdata/n8n/.:/home/node/.n8n
     environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
       # Basic configuration
       - N8N_BASIC_AUTH_ACTIVE=true          # Enables basic auth
       - N8N_BASIC_AUTH_USER=${USER}           # Username for basic auth
