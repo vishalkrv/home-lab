@@ -11,6 +11,9 @@ services:
       - TZ=${TZ}
       - VERSION=${VERSION}
       - PLEX_CLAIM=${PLEX_CLAIM}
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
     volumes:
       - /mnt/user/appdata/plex:/config
       - /mnt/user/Media/TV:/tv
