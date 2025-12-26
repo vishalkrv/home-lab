@@ -2,6 +2,8 @@ services:
   kavita:
     image: lscr.io/linuxserver/kavita:latest
     container_name: kavita
+    env_file:
+      - stack.env #optional
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
