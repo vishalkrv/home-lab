@@ -2,11 +2,14 @@ version: '3'
 services:
   pinchflat:
     image: ghcr.io/kieraneglin/pinchflat:latest
+    env_file:
+      - stack.env #optional
     environment:
-      # Set the timezone to your local timezone
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
     ports:
       - ${PORT_1}:8945
     volumes:
-      - ~/docker/pinchflat/config:/config
-      - /mnt/passport/youtube:/downloads
+      - /mnt/user/appdata/pinchflat/config:/config
+      - /mnt/user/Download/youtube:/downloads

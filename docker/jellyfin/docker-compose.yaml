@@ -14,6 +14,8 @@ services:
       - /mnt/user/Media/TV:/data/tvshows
       - /mnt/user/Media/Movie:/data/movies
       - /mnt/user/Media/Music:/data/music
+    devices:
+      - /dev/dri:/dev/dri
     ports:
       - ${PORT_1}:8096
       - ${PORT_2}:7359/udp #optional

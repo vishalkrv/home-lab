@@ -3,6 +3,8 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
+    env_file:
+      - stack.env #optional
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -10,8 +12,8 @@ services:
       - WEBUI_PORT=${PORT_1}
       - TORRENTING_PORT=${PORT_2}
     volumes:
-      - ~/docker/qbittorrent/appdata:/config
-      - /mnt/passport/Download:/downloads #optional
+      - /mnt/user/appdata/qbittorrent/appdata:/config
+      - /mnt/user/Download/torrent:/downloads #optional
     ports:
       - ${PORT_1}:${PORT_1}
       - ${PORT_2}:${PORT_2}
