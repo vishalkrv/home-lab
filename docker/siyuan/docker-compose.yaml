@@ -12,4 +12,4 @@ services:
             - PGID=${PGID}
             - TZ={TZ}
         image: apkdv/siyuan-unlock
-        command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${ACCESS_CODE}']
+        command: ['serve','--workspace=/siyuan/workspace/', '--accessAuthCode=${ACCESS_CODE}']
